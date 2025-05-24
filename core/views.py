@@ -19,10 +19,10 @@ def doctor_as_dev(request):
         return redirect('index')
         
 
-    with open('/home/uch/Downloads/prescribematedev/devfiles/generic_names.txt','r') as file:
+    with open('/home/uch/prescribemate/core/corefiles/generic_names.xlsx','r') as file:
         lines = [line for line in file]
         generics = [line.rstrip('\n') for line in lines]
     context = {
         'generics': generics,
     }
-    return render(request,'dev/index.html',context)
+    return render(request,'core/doctor_as_dev.html',context)

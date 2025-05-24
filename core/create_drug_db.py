@@ -38,7 +38,7 @@ def rebrand(type,brand,strength):
         rebrand_tuple = (re_type,brand,'(',strength,')')
     return ' '.join(rebrand_tuple)
 
-path = '/home/uch/Downloads/prescribematedev/devfiles/drugs.xlsx'
+path = config('DRUGS_XLSX_PATH')
 
 workbook = load_workbook(path)
 sheet = workbook.active
