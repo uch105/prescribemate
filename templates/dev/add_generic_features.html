@@ -1,0 +1,143 @@
+{% extends "dev/base.html" %}
+{% load hosts %}
+{% load static %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <div class="card shadow">
+            <div class="card-header bg-success text-white">
+                <h4 class="mb-0">Add New Drug</h4>
+            </div>
+            <div class="card-body">
+                <form method="POST" enctype="multipart/form-data" action="{% host_url 'addgenericfeatures' host 'dev' %}">
+                    {% csrf_token %}
+
+                    <!-- Basic Info -->
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <label for="generic_name" class="form-label">Generic Name*</label>
+                            <select class="form-select" id="generic_name" name="generic_name" required>
+                                <option value="" disabled selected>Select generic</option>
+                                {% for generic in generic_list %}
+                                    <option value="{{ generic }}">{{ generic }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Indications Section -->
+                    <div class="mb-4 border p-3 rounded">
+                        <h5 class="mb-3 text-primary">Indications</h5>
+                        <div class="mb-3">
+                            <label for="indication_input" class="form-label">Indication (Keywords)</label>
+                            <input type="text" class="form-control" id="indication_input" name="indications_list">
+                        </div>
+                    </div>
+
+                    <!-- Contraindications Section -->
+                    <div class="mb-4 border p-3 rounded">
+                        <h5 class="mb-3 text-danger">Contraindications</h5>
+                        <div class="mb-3">
+                            <label for="contraindication_input" class="form-label">Contraindication (Keywords)</label>
+                            <input type="text" class="form-control" id="contraindication_input" name="contraindications_list">
+                        </div>
+                    </div>
+
+                    <!-- Side Effects Section -->
+                    <div class="mb-4 border p-3 rounded">
+                        <h5 class="mb-3 text-warning">Side Effects</h5>
+                        <div class="mb-3">
+                            <label for="side_effect_input" class="form-label">Side Effect (Keywords)</label>
+                            <input type="text" class="form-control" id="side_effect_input" name="side_effects_list">
+                        </div>
+                    </div>
+
+                    <!-- Theraputic Class Section -->
+                    <div class="mb-4 border p-3 rounded">
+                        <h5 class="mb-3 text-warning">Theraputic Class</h5>
+                        <div class="mb-3">
+                            <label for="side_effect_input" class="form-label">Theraputic Class (Keywords)</label>
+                            <input type="text" class="form-control" id="side_effect_input" name="theraputic_classes_list">
+                        </div>
+                    </div>
+
+                    <!-- Pregnancy Precautions Section -->
+                    <div class="mb-4 border p-3 rounded">
+                        <h5 class="mb-3 text-info">Pregnancy & Lactations</h5>
+                        <div class="mb-3">
+                            <label for="pregnancy_precautions" class="form-label">General Guidelines</label>
+                            <textarea class="form-control" id="pregnancy_precautions" name="pregnancy_lactations" rows="3"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Dosage Administration Section -->
+                    <div class="mb-4 border p-3 rounded">
+                        <h5 class="mb-3 text-warning">Dosage Administration</h5>
+                        <div class="mb-3">
+                            <label for="side_effects" class="form-label">Dosage Administration</label>
+                            <textarea class="form-control" id="side_effects" name="dosage_administrations" rows="3"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="side_effect_input" class="form-label">Dosage Administration (Keywords)</label>
+                            <input type="text" class="form-control" id="side_effect_input" name="dosage_administrations_list">
+                        </div>
+                    </div>
+
+                    <!-- Interaction Section -->
+                    <div class="mb-4 border p-3 rounded">
+                        <h5 class="mb-3 text-warning">Interaction</h5>
+                        <div class="mb-3">
+                            <label for="side_effects" class="form-label">Interactions</label>
+                            <textarea class="form-control" id="side_effects" name="interactions" rows="3"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Mechanism of Action Section -->
+                    <div class="mb-4 border p-3 rounded">
+                        <h5 class="mb-3 text-warning">Mechanism of Action</h5>
+                        <div class="mb-3">
+                            <label for="side_effects" class="form-label">Mechanism of Action</label>
+                            <textarea class="form-control" id="side_effects" name="mechanism_of_actions" rows="3"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Precautions & Warnings Section -->
+                    <div class="mb-4 border p-3 rounded">
+                        <h5 class="mb-3 text-warning">Precautions & Warnings</h5>
+                        <div class="mb-3">
+                            <label for="side_effects" class="form-label">Precautions & Warnings</label>
+                            <textarea class="form-control" id="side_effects" name="precautions_warnings" rows="3"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Storage Section -->
+                    <div class="mb-4 border p-3 rounded">
+                        <h5 class="mb-3 text-warning">Storage</h5>
+                        <div class="mb-3">
+                            <label for="side_effects" class="form-label">Storage</label>
+                            <textarea class="form-control" id="side_effects" name="storage" rows="3"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Overdose Section -->
+                    <div class="mb-4 border p-3 rounded">
+                        <h5 class="mb-3 text-warning">Overdose</h5>
+                        <div class="mb-3">
+                            <label for="side_effects" class="form-label">Overdose</label>
+                            <textarea class="form-control" id="side_effects" name="overdose" rows="3"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="d-grid gap-2 mt-4">
+                        <button type="submit" class="btn btn-success btn-lg">
+                            <i class="fas fa-pills me-2"></i> Save Drug Information
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

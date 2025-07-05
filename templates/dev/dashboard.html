@@ -1,0 +1,39 @@
+{% extends "dev/base.html" %}
+{% load hosts %}
+{% load static %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="row">
+    <!-- Sidebar -->
+    <div class="col-md-3">
+        <div class="card shadow">
+            <div class="card-header bg-secondary text-white">
+                <h5>Menu</h5>
+            </div>
+            <div class="card-body">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% host_url 'addgenericfeatures' host 'dev' %}">Add New</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="col-md-9">
+        <div class="card shadow">
+            <div class="card-header bg-info text-white">
+                <h5>Welcome, {{ user.name }}</h5>
+            </div>
+            <div class="card-body">
+                {% block dashboard_content %}
+                    <p>Your dashboard overview goes here.</p>
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

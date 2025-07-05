@@ -1,0 +1,229 @@
+:root{
+    --primary-color: #00539b;
+    --secondary-color: #008746;
+}
+@font-face {
+    font-family: 'NotoSans';
+    src: url('../fonts/NotoSansBengali-VariableFont_wdth,wght.ttf') format('truetype');
+    font-display: swap;
+}
+html,body,*{
+    padding: 0;
+    margin: 0;
+    font-family: 'NotoSans', sans-serif;
+}
+h1,h2,h3,h5,h6,strong{
+    font-weight: 900;
+}
+p,input,button,textarea{
+    font-weight: 450;
+}
+a{
+    text-decoration: none;
+}
+.fw-900{
+    font-weight: 900;
+}
+.fw-700,a{
+    font-weight: 700;
+}
+.fw-600{
+    font-weight: 600;
+}
+.fw-500{
+    font-weight: 500;
+}
+.fw-400{
+    font-weight: 400;
+}
+.fw-300{
+    font-weight: 300;
+}
+.fst-n{
+    font-style: normal;
+}
+.fst-i{
+    font-style: italic;
+}
+.fs-8{
+    font-size: 8px;
+}
+.fs-10{
+    font-size: 10px;
+}
+.fs-11{
+    font-size: 11px;
+}
+.fs-12{
+    font-size: 12px;
+}
+.fs-14{
+    font-size: 14px;
+}
+.fs-16{
+    font-size: 16px;
+}
+.fs-18{
+    font-size: 18px;
+}
+.fs-20{
+    font-size: 20px;
+}
+.fs-24{
+    font-size: 24px;
+}
+.fs-26{
+    font-size: 26px;
+}
+.fs-28{
+    font-size: 28px;
+}
+.fs-30{
+    font-size: 30px;
+}
+.fs-36{
+    font-size: 36px;
+}
+.fs-40{
+    font-size: 40px;
+}
+.fs-48{
+    font-size: 48px;
+}
+.clr-blue{
+    color: var(--primary-color);
+}
+.clr-green{
+    color: var(--secondary-color);
+}
+.clr-white{
+    color: var(--background-color);
+}
+.clr-black{
+    color: var(--main-color);
+}
+.bg-blue{
+    background-color: var(--primary-color);
+}
+.bg-green{
+    background-color: var(--secondary-color);
+}
+.bg-white{
+    background-color: var(--background-color);
+}
+.bg-black{
+    background-color: var(--main-color);
+}
+.border-card{
+    border: 0.1px solid rgba(0, 0, 0, 0.1);
+}
+.border-bt-black{
+    border: 1px solid var(--main-color);
+}
+.border-bt-white{
+    border: 1px solid var(--background-color);
+}
+.border-bt-blue{
+    border: 1px solid var(--primary-color);
+}
+.border-bt-green{
+    border: 1px solid var(--secondary-color);
+}
+.br-2{
+    border-radius: 2px;
+}
+.br-3{
+    border-radius: 3px;
+}
+.br-5{
+    border-radius: 5px;
+}
+.br-7{
+    border-radius: 7px;
+}
+.br-10{
+    border-radius: 10px;
+}
+.shadow-card{
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+}
+.pd-btn{
+    padding: 7px 20px;
+}
+
+
+/* Messages container */
+.messages-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    max-width: 400px;
+}
+.message {
+    position: relative;
+    padding: 15px 40px 15px 20px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+    animation: slideIn 0.5s ease-out;
+}
+.message-success {
+    background-color: #4CAF50;
+}
+
+.message-error {
+    background-color: #F44336;
+}
+
+.message-info {
+    background-color: #2196F3;
+}
+
+.message-warning {
+    background-color: #FF9800;
+}
+.close-btn {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 0 5px;
+}
+@keyframes slideIn {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+}
+
+.fade-out {
+    opacity: 0 !important;
+}
+
+
+/* ------------------ navbar - - - - - - */
+
+nav{
+    padding: 30px 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--background-color);
+}
+nav img{
+    width: 70px;
+    height: 70px;
+}
+nav ul{
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    justify-content: center;
+}

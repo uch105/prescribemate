@@ -1,0 +1,18 @@
+{% load static %}
+{% load hosts %}
+
+<nav>
+    <div>
+        <img src="{% static 'files/images/logo.png' %}" alt="Prescribemate">
+    </div>
+    {% if 'terms' or 'privacy' in request.path %}
+    {% else %}
+    <div>
+        <ul>
+            <li><a href="{% host_url 'administration' host 'www' %}" {% if 'administration' in request.path %} class="clr-white bg-blue fs-16 pd-btn br-3" {% else %} class="clr-black border-bt-blue fs-16 pd-btn br-3" {% endif %}>Administration</a></li>
+            <li><a href="{% host_url 'sitetraffic' host 'www' %}" {% if 'sitetraffic' in request.path %} class="clr-white bg-blue fs-16 pd-btn br-3" {% else %} class="clr-black border-bt-blue fs-16 pd-btn br-3" {% endif %}>Site traffic</a></li>
+            <li><a href="{% host_url 'lookup' host 'www' %}" {% if 'lookup' in request.path %} class="clr-white bg-blue fs-16 pd-btn br-3" {% else %} class="clr-black border-bt-blue fs-16 pd-btn br-3" {% endif %}>Look-up</a></li>
+        </ul>
+    </div>
+    {% endif %}
+</nav>

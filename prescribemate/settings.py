@@ -1,14 +1,15 @@
 from pathlib import Path
 import os
 from decouple import config
+from django.contrib.messages import constants as messages
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG')
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['localhost','www.localhost','hospitals.localhost','patients.localhost','pharmacy.localhost','doctors.localhost','dev.localhost','prescribemate.com','www.prescribemate.com','hospitals.prescribemate.com','patients.prescribemate.com','pharmacy.prescribemate.com','doctors.prescribemate.com','dev.prescribemate.com',]
 
-BASE_DOMAIN = config('BASE_DOMAIN', default='192.168.0.101')
+BASE_DOMAIN = config('BASE_DOMAIN')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -46,6 +47,7 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'prescribemate.urls'
 ROOT_HOSTCONF = 'prescribemate.hosts'
 DEFAULT_HOST = 'www'
+PARENT_HOST = 'localhost:8000' if DEBUG else 'prescribemate.com'
 
 TEMPLATES = [
     {
@@ -63,16 +65,15 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'prescribemate.wsgi.application'
-
-'''
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+MESSAGE_TAGS = {
+    messages.DEBUG: 'message-info',
+    messages.INFO: 'message-info',
+    messages.SUCCESS: 'message-success',
+    messages.WARNING: 'message-warning',
+    messages.ERROR: 'message-error',
 }
-'''
+
+WSGI_APPLICATION = 'prescribemate.wsgi.application'
 
 DATABASES = {
     'default':{
@@ -85,6 +86,7 @@ DATABASES = {
     }
 }
 
+LOGIN_URL = '/login/'
 AUTH_USER_MODEL = 'common.User'
 AUTH_PASSWORD_VALIDATORS = []
 AUTHENTICATION_BACKENDS = ['common.auth_backend.UsernameBackend']
@@ -94,11 +96,49 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
+if DEBUG:
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, 'static')
+    ]
+else:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+
 MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 USE_SUBDOMAIN_ROUTING = True
-SESSION_COOKIE_DOMAIN = f".{BASE_DOMAIN}"
-CSRF_COOKIE_DOMAIN = f".{BASE_DOMAIN}"
+CSRF_TRUSTED_ORIGINS = [
+    'http://dev.localhost:8000',
+    'http://doctors.localhost:8000',
+    'http://hospitals.localhost:8000',
+    'http://patients.localhost:8000',
+    'http://pharmacy.localhost:8000',
+    'http://www.localhost:8000',
+    'http://dev.localhost:8000',
+    'http://localhost:8000',
+    'https://dev.prescribemate.com',
+    'https://doctors.prescribemate.com',
+    'https://hospitals.prescribemate.com',
+    'https://patients.prescribemate.com',
+    'https://pharmacy.prescribemate.com',
+    'https://www.prescribemate.com',
+    'https://prescribemate.com',
+]
+SESSION_COOKIE_DOMAIN = '.prescribemate.com' #'.localhost' or BASE_DOMAIN
+CSRF_COOKIE_DOMAIN = '.prescribemate.com' #'.localhost' or BASE_DOMAIN
+CSRF_COOKIE_SECURE = True  # Set True in production (HTTPS only)
+CSRF_COOKIE_HTTPONLY = True
+SESSION_COOKIE_SECURE = True  # Send session cookie only over HTTPS
+SESSION_COOKIE_HTTPONLY = True  # Prevent JS access to session cookie
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'mx5.alpha.net.bd'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'info@nutsutechnologies.com'
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = 'info@nutsutechnologies.com'
+SERVER_EMAIL = 'info@nutsutechnologies.com'

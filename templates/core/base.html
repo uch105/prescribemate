@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{% load static %}
+{% load hosts %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+        {% endblock %}
+    </title>
+    {% block head_links %}
+    {% endblock %}
+    <link rel="stylesheet" href="{% static 'files/css/light.css' %}">
+    <link rel="stylesheet" href="{% static 'files/css/master.css' %}">
+    <link rel="preload" href="{% static 'files/fonts/NotoSansBengali-VariableFont_wdth,wght.ttf' %}" as="font" type="font/ttf" crossorigin>
+</head>
+<body>
+    {% block header_scripts %}
+    {% endblock %}
+
+    {% include 'core/navbar.html' %}
+
+    {% if messages %}
+    <div class="messages-container">
+        {% for message in messages %}
+        <div class="message message-{{ message.tags }}">
+            <span class="message-text">{{ message }}</span>
+            <button class="close-btn" onclick="this.parentElement.remove()">&times;</button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {% block body %}
+    {% endblock %}
+
+    {% block footer_scripts %}
+    {% endblock %}
+
+    <script src="{% static 'files/js/master.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load hosts %}
+
+{% block title %}
+Prescribemate - Terms & Conditions
+{% endblock %}
+
+{% block head_links %}
+<style>
+    .terms-container{
+        padding: 20px 300px;
+    }
+    @media screen and (max-width: 900px) {
+        .terms-container{
+            padding: 20px 100px;
+        }
+    }
+    @media screen and (max-width: 600px) {
+        .terms-container{
+            padding: 20px 50px;
+        }
+    }
+    .accordion {
+      background-color: #fff;
+      color: #444;
+      cursor: pointer;
+      padding: 18px 20px;
+      width: 100%;
+      border: none;
+      text-align: left;
+      outline: none;
+      transition: 0.3s;
+      font-size: 18px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .accordion:hover, .active {
+      background-color: #eee;
+    }
+
+    .panel {
+      padding: 0 20px;
+      display: none;
+      overflow: hidden;
+      background-color: white;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .panel p {
+      padding: 10px 0;
+      line-height: 1.6;
+    }
+</style>
+{% endblock %}
+
+{% block header_scripts %}
+{% endblock %}
+
+{% block body %}
+<div class="terms-container">
+<h1>Terms & Conditions</h1>
+<p>Effective Date: mAY 30, 2025
+<br>
+Welcome to Prescribemate (“we”, “us”, or “our”). These Terms and Conditions (“Terms”) govern your use of our healthcare application (the “App”), which includes services for patients, doctors, pharmacies, and hospitals in Bangladesh.
+<br>
+By accessing or using the App, you agree to be bound by these Terms. If you do not agree, please do not use the App.</p>
+<br>
+<button class="accordion">1. Eligibility</button>
+<div class="panel">
+<p>You must be at least 18 years old to register or use the App. Users are responsible for ensuring they meet the legal and professional eligibility requirements applicable to their user role (patient, doctor, pharmacy, or hospital).</p>
+</div>
+
+<button class="accordion">2. User Types and Access</button>
+<div class="panel">
+<p>This platform includes the following user types:</p>
+<ul>
+    <li>Patients: Can book appointments, access medical records, and view prescriptions.</li>
+    <li>Doctors: Can manage appointments, view patient records, and issue prescriptions.</li>
+    <li>Pharmacies: Can view prescriptions and update dispensation status.</li>
+    <li>Hospitals: Can manage doctor schedules, inpatient records, and pharmacy integration.</li>
+</ul>
+</div>
+
+<button class="accordion">3. Account Registration and Security</button>
+<div class="panel">
+<p>Users must provide accurate, complete, and updated information during account registration. You are responsible for maintaining the confidentiality of your account and password and for restricting access to your device.</p>
+</div>
+
+<button class="accordion">4. Data Privacy and Confidentiality</button>
+<div class="panel">
+<p>We comply with the Digital Security Act, 2018 of Bangladesh and maintain confidentiality of all personal and medical information. User data is securely stored and used only for purposes outlined in the Privacy Policy.</p>
+</div>
+
+<button class="accordion">5. Payments and Fees</button>
+<div class="panel">
+<p>Some features may require payment. Users can pay via our secured integrated mobile payment or card gateways. All transactions are processed securely. Refunds are subject to eligibility and require review. Pharmacies, doctors, or hospitals may charge separately and are responsible for informing users of any such charges.</p>
+</div>
+
+<button class="accordion">6. Responsibilities and Code of Conduct</button>
+<div class="panel">
+<p>Users agree not to misuse the app for illegal or unauthorized purposes. Professionals must act in accordance with their respective medical or pharmaceutical codes of conduct. Misuse may lead to suspension or permanent removal from the platform. We may also take legal action upon violation of our terms & conditions.</p>
+</div>
+
+<button class="accordion">7. Medical Disclaimer</button>
+<div class="panel">
+<p>This app does not offer emergency services. In case of emergency, please contact your local emergency number or go to the nearest hospital. The app is intended for routine care, communication, and record-keeping.</p>
+</div>
+
+<button class="accordion">8. Limitation of Liability</button>
+<div class="panel">
+<p>We are not liable for indirect, incidental, or consequential damages. Our total liability shall not exceed the amount paid by the user (if any) for using the service in the 6 months prior to the claim.</p>
+</div>
+
+<button class="accordion">9. Intellectual Property</button>
+<div class="panel">
+<p>All content, including logos, UI design, source code, and documentation, is owned by the platform. Users may not copy, reproduce, or redistribute any part of the platform without written permission.</p>
+</div>
+
+<button class="accordion">10. Termination</button>
+<div class="panel">
+<p>We reserve the right to terminate any user account for breach of these terms or applicable laws. Data associated with the account will be handled per our privacy policy.</p>
+</div>
+
+<button class="accordion">11. Governing Law</button>
+<div class="panel">
+<p>These terms are governed by and construed in accordance with the laws of the People’s Republic of Bangladesh. Any disputes shall be resolved under the jurisdiction of the courts in Bangladesh.</p>
+</div>
+
+<button class="accordion">12. Changes to Terms</button>
+<div class="panel">
+<p>We may update these Terms and Conditions from time to time. Continued use of the app after changes means you accept the revised terms.</p>
+</div>
+
+<button class="accordion">13. Contact</button>
+<div class="panel">
+<p>If you have any questions about these Terms, please contact us:<br>
+Email: info@prescribemate.com<br>
+Phone: +8801635817747</p>
+</div>
+</div>
+<script>
+const accordions = document.querySelectorAll('.accordion');
+accordions.forEach(btn => {
+    btn.addEventListener('click', function () {
+    this.classList.toggle('active');
+    const panel = this.nextElementSibling;
+    panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
+    });
+});
+</script>
+{% endblock %}
+
+{% block footer_scripts %}
+{% endblock %}

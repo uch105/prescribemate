@@ -1,0 +1,162 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load hosts %}
+
+{% block title %}
+Prescribemate - Privacy Policy
+{% endblock %}
+
+{% block head_links %}
+<style>
+    .terms-container{
+        padding: 20px 300px;
+    }
+    @media screen and (max-width: 900px) {
+        .terms-container{
+            padding: 20px 100px;
+        }
+    }
+    @media screen and (max-width: 600px) {
+        .terms-container{
+            padding: 20px 50px;
+        }
+    }
+    .accordion {
+      background-color: #fff;
+      color: #444;
+      cursor: pointer;
+      padding: 18px 20px;
+      width: 100%;
+      border: none;
+      text-align: left;
+      outline: none;
+      transition: 0.3s;
+      font-size: 18px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .accordion:hover, .active {
+      background-color: #eee;
+    }
+
+    .panel {
+      padding: 0 20px;
+      display: none;
+      overflow: hidden;
+      background-color: white;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .panel p {
+      padding: 10px 0;
+      line-height: 1.6;
+    }
+</style>
+{% endblock %}
+
+{% block header_scripts %}
+{% endblock %}
+
+{% block body %}
+<div class="terms-container">
+    <h1>Privacy Policy</h1>
+    <p>
+        Effective Date: May 30, 2025
+        <br>
+Last Updated: May 30, 2025
+<br>
+Prescribemate (“we,” “our,” or “us”) is committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy outlines how we collect, use, disclose, and protect the data of all users—including patients, doctors, pharmacies, and hospitals—who access our healthcare management platform in Bangladesh.
+<br>
+By using our app or website, you agree to the practices described in this Privacy Policy. <br>
+</p>
+
+  <button class="accordion">1. Introduction</button>
+  <div class="panel">
+    <p>This Privacy Policy outlines how we collect, use, and protect your information when you use our healthcare app and services. Your privacy is important to us, and we are committed to complying with the laws of Bangladesh including the Digital Security Act, 2018.</p>
+  </div>
+
+  <button class="accordion">2. Information We Collect</button>
+  <div class="panel">
+    <p>We may collect the following types of information:</p>
+    <ul>
+      <li>Personal details (e.g., name, age, gender, contact info)</li>
+      <li>Medical information (e.g., prescriptions, symptoms, diagnoses)</li>
+      <li>Device and usage data (e.g., IP address, app activity)</li>
+      <li>Payment information (if applicable)</li>
+    </ul>
+  </div>
+
+  <button class="accordion">3. How We Use Your Information</button>
+  <div class="panel">
+    <p>We use your information to:</p>
+    <ul>
+      <li>Provide healthcare services (appointments, prescriptions, reports)</li>
+      <li>Enable communication between patients, doctors, pharmacies, and hospitals</li>
+      <li>Improve app functionality and user experience</li>
+      <li>Comply with legal obligations and protect against fraud</li>
+    </ul>
+  </div>
+
+  <button class="accordion">4. Data Sharing and Disclosure</button>
+  <div class="panel">
+    <p>We do not sell your personal data. Your data may be shared with:</p>
+    <ul>
+      <li>Authorized doctors, hospitals, and pharmacies for medical care</li>
+      <li>Government agencies or law enforcement if required by law</li>
+      <li>Service providers who help us operate the app securely</li>
+    </ul>
+  </div>
+
+  <button class="accordion">5. Data Storage and Security</button>
+  <div class="panel">
+    <p>We store data in secure, encrypted databases. We implement safeguards to prevent unauthorized access, misuse, or disclosure. However, no online system is 100% secure, and users are responsible for securing their own devices and passwords.</p>
+  </div>
+
+  <button class="accordion">6. User Rights</button>
+  <div class="panel">
+    <p>Under applicable laws, you have the right to:</p>
+    <ul>
+      <li>Access your personal data</li>
+      <li>Request corrections or deletions</li>
+      <li>Withdraw consent where applicable</li>
+      <li>Request account deactivation</li>
+    </ul>
+  </div>
+
+  <button class="accordion">7. Cookies and Analytics</button>
+  <div class="panel">
+    <p>We may use cookies and analytics tools to improve app performance and understand usage trends. These do not identify individuals and are used for internal purposes only.</p>
+  </div>
+
+  <button class="accordion">8. Children’s Privacy</button>
+  <div class="panel">
+    <p>This app is not intended for children under the age of 13 without parental or guardian consent. We do not knowingly collect data from minors without proper authorization.</p>
+  </div>
+
+  <button class="accordion">9. Changes to This Policy</button>
+  <div class="panel">
+    <p>We may update this Privacy Policy from time to time. You will be notified of material changes through the app or registered email. Continued use of the app indicates your acceptance of the updated policy.</p>
+  </div>
+
+  <button class="accordion">10. Contact Us</button>
+  <div class="panel">
+    <p>If you have any questions or requests related to this Privacy Policy, please contact us at:<br>
+    Email: privacy@healthcareapp.com<br>
+    Phone: +880-123456789</p>
+  </div>
+
+  <script>
+    const accordions = document.querySelectorAll('.accordion');
+    accordions.forEach(btn => {
+      btn.addEventListener('click', function () {
+        this.classList.toggle('active');
+        const panel = this.nextElementSibling;
+        panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
+      });
+    });
+  </script>
+</div>
+{% endblock %}
+
+{% block footer_scripts %}
+{% endblock %}
