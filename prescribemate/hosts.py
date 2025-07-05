@@ -3,10 +3,10 @@ from django_hosts import patterns, host
 host_patterns = patterns(
     '',
     host(r'www', 'prescribemate.urls_main', name='www'),
-    host(r'', 'prescribemate.urls_main', name='main'),
     host(r'doctors', 'prescribemate.urls_doctors', name='doctors'),
     host(r'patients', 'prescribemate.urls_patients', name='patients'),
     host(r'hospitals', 'prescribemate.urls_hospitals', name='hospitals'),
     host(r'pharmacy', 'prescribemate.urls_pharmacy', name='pharmacy'),
     host(r'dev', 'prescribemate.urls_dev', name='dev'),
+    host(r'', 'prescribemate.urls_main', name='main'),
 )

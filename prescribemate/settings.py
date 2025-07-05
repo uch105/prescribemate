@@ -6,7 +6,7 @@ from django.contrib.messages import constants as messages
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = config('SECRET_KEY')
-DEBUG = config('DEBUG')
+DEBUG = False #True for development
 ALLOWED_HOSTS = ['localhost','www.localhost','hospitals.localhost','patients.localhost','pharmacy.localhost','doctors.localhost','dev.localhost','prescribemate.com','www.prescribemate.com','hospitals.prescribemate.com','patients.prescribemate.com','pharmacy.prescribemate.com','doctors.prescribemate.com','dev.prescribemate.com',]
 
 BASE_DOMAIN = config('BASE_DOMAIN')
@@ -127,8 +127,9 @@ CSRF_TRUSTED_ORIGINS = [
     'https://www.prescribemate.com',
     'https://prescribemate.com',
 ]
-SESSION_COOKIE_DOMAIN = '.prescribemate.com' #'.localhost' or BASE_DOMAIN
-CSRF_COOKIE_DOMAIN = '.prescribemate.com' #'.localhost' or BASE_DOMAIN
+SESSION_COOKIE_DOMAIN = '.prescribemate.com' #'.localhost' or BASE_DOMAIN........ None for development 
+CSRF_COOKIE_DOMAIN = '.prescribemate.com' #'.localhost' or BASE_DOMAIN....... None for development
+#these next four lines goes comment in development
 CSRF_COOKIE_SECURE = True  # Set True in production (HTTPS only)
 CSRF_COOKIE_HTTPONLY = True
 SESSION_COOKIE_SECURE = True  # Send session cookie only over HTTPS
