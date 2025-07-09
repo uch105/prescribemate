@@ -11,6 +11,7 @@ admin.site.register(Patient)
 admin.site.register(Doctor)
 admin.site.register(Pharmacy)
 admin.site.register(FamilyMember)
+'''
 admin.site.register(Hospital)
 admin.site.register(HospitalAdmission)
 admin.site.register(HospitalBranch)
@@ -23,3 +24,4 @@ admin.site.register(HospitalWardBed)
 admin.site.register(HospitalTestResult)
 admin.site.register(Chamber)
 admin.site.register(ChamberAppointment)
+'''
