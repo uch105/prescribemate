@@ -92,7 +92,7 @@ AUTH_PASSWORD_VALIDATORS = []
 AUTHENTICATION_BACKENDS = ['common.auth_backend.UsernameBackend']
 
 LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Dhaka'
 USE_I18N = True
 USE_TZ = True
 
@@ -108,8 +108,10 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 20000
 
 USE_SUBDOMAIN_ROUTING = True
+
 CSRF_TRUSTED_ORIGINS = [
     'http://dev.localhost:8000',
     'http://doctors.localhost:8000',
