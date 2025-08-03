@@ -1,0 +1,149 @@
+{% extends 'hospitals/base.html' %}
+
+{% load static %}
+
+{% load hosts %}
+
+{% block title %}Welcome to Prescribemate for Hospitals{% endblock %}
+
+{% block body %}
+<!-- HERO SECTION -->
+<section class="bg-light padding-xxl">
+    <div class="container text-center">
+        <img src="{% static 'files/images/logo.svg' %}" alt="Prescribemate" width="100px" height="100px">
+        <h1 class="text-heading-1 margin-bottom-md">Empower Your Hospital with Prescribemate</h1>
+        <p class="text-lead text-dark margin-bottom-xl">A complete digital healthcare suite — for patients, doctors, diagnostics, and beyond.</p>
+        <div class="flex flex-justify-center gap-md">
+            <a href="#features" class="btn btn-secondary btn-lg shadow-md hover:text-bold">Explore Features</a>
+            <a href="#register" class="btn btn-outline btn-lg hover:bg-primary hover:text-light">Join Now</a>
+        </div>
+    </div>
+</section>
+
+<!-- FEATURES SECTION -->
+<section id="features" class="padding-xxl">
+    <div class="container">
+        <h2 class="text-heading-2 text-center margin-bottom-xxl">Platform Highlights</h2>
+        <div class="grid grid-cols-3 gap-xl grid-lg-cols-2 grid-md-cols-1">
+            <div class="card shadow-md hover:shadow-lg transition-all hover:transform hover:-translate-y-1">
+                <div class="card-body padding-xl">
+                    <div class="text-primary text-heading-4 margin-bottom-sm">📝</div>
+                    <h3 class="text-heading-4 margin-bottom-sm">Digital Prescriptions</h3>
+                    <p class="text-small">Generate, review, and share prescriptions instantly with integrated patient access.</p>
+                </div>
+            </div>
+            <div class="card shadow-md hover:shadow-lg transition-all hover:transform hover:-translate-y-1">
+                <div class="card-body padding-xl">
+                    <div class="text-primary text-heading-4 margin-bottom-sm">🛏️</div>
+                    <h3 class="text-heading-4 margin-bottom-sm">Ward & Bed Management</h3>
+                    <p class="text-small">Assign beds and manage admissions with live availability tracking.</p>
+                </div>
+            </div>
+            <div class="card shadow-md hover:shadow-lg transition-all hover:transform hover:-translate-y-1">
+                <div class="card-body padding-xl">
+                    <div class="text-primary text-heading-4 margin-bottom-sm">👨‍⚕️</div>
+                    <h3 class="text-heading-4 margin-bottom-sm">Doctor & Staff Dashboard</h3>
+                    <p class="text-small">Role-based access for hospital employees, doctors, and diagnostic staff.</p>
+                </div>
+            </div>
+            <div class="card shadow-md hover:shadow-lg transition-all hover:transform hover:-translate-y-1">
+                <div class="card-body padding-xl">
+                    <div class="text-primary text-heading-4 margin-bottom-sm">🔬</div>
+                    <h3 class="text-heading-4 margin-bottom-sm">Diagnostic Integration</h3>
+                    <p class="text-small">Issue, track, and review test results with smart patient linkage.</p>
+                </div>
+            </div>
+            <div class="card shadow-md hover:shadow-lg transition-all hover:transform hover:-translate-y-1">
+                <div class="card-body padding-xl">
+                    <div class="text-primary text-heading-4 margin-bottom-sm">💳</div>
+                    <h3 class="text-heading-4 margin-bottom-sm">Wallet & Coupons</h3>
+                    <p class="text-small">Manage hospital transactions, issue promotions, and automate billing.</p>
+                </div>
+            </div>
+            <div class="card shadow-md hover:shadow-lg transition-all hover:transform hover:-translate-y-1">
+                <div class="card-body padding-xl">
+                    <div class="text-primary text-heading-4 margin-bottom-sm">🚑</div>
+                    <h3 class="text-heading-4 margin-bottom-sm">Ambulance Dispatch</h3>
+                    <p class="text-small">Coordinate emergency services with real-time vehicle and request tracking.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA SECTION -->
+<section class="cta-section bg-primary text-light padding-xxl">
+    <div class="container text-center">
+        <h2 class="text-heading-2 margin-bottom-md">Ready to Join Prescribemate?</h2>
+        <p class="text-lead margin-bottom-xl">Submit your hospital registration request and start today.</p>
+        <a href="#register" class="btn bg-light btn-lg shadow-md hover:shadow-lg hover:bg-light">Register Your Hospital</a>
+    </div>
+</section>
+
+<!-- JOIN REQUEST FORM -->
+<section id="register" class="padding-xxl">
+    <div class="container">
+        <h3 class="text-heading-3 text-center margin-bottom-xl">Hospital Registration Request</h3>
+
+        <form method="POST" class="card shadow-lg max-w-xl margin-auto"  enctype="multipart/form-data">
+            <div class="card-body padding-xl">
+                {% csrf_token %}
+                <div class="form-group margin-bottom-lg">
+                    <label class="form-label margin-bottom-xs" for="name">Hospital Name</label>
+                    <input type="text" name="name" required class="form-control form-control-lg" placeholder="Your Hospital Name" required>
+                </div>
+
+                <div class="form-group margin-bottom-lg">
+                    <label class="form-label margin-bottom-xs" for="reg_code">Registration Code</label>
+                    <input type="text" name="reg_code" required class="form-control form-control-lg" placeholder="e.g HSM01234" required>
+                </div>
+
+                <div class="form-group margin-bottom-lg">
+                    <label class="form-label margin-bottom-xs" for="phone">Legal Contact</label>
+                    <input type="text" name="phone" required class="form-control form-control-lg" placeholder="017XXXXXXXX" required>
+                </div>
+
+                <div class="form-group margin-bottom-lg">
+                    <label class="form-label margin-bottom-xs" for="district">Select District</label>
+                    <select name="district" class="form-control form-control-lg" required>
+                        <option value="" selected disabled>-- Select District --</option>
+                        {% for district in districts %}
+                            <option value="{{ district }}">{{ district }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group margin-bottom-lg">
+                    <label class="form-label margin-bottom-xs" for="sub_district">Select Upazilla</label>
+                    <select name="sub_district" class="form-control form-control-lg" required>
+                        <option value="" selected disabled>-- Select Upazilla --</option>
+                        {% for upazilla in upazillas %}
+                            <option value="{{ upazilla }}">{{ upazilla }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="fileUpload" class="form-label">Upload your hospital logo</label>
+                    <div class="file-upload-wrapper">
+                        <button type="button" class="file-upload-button">Choose File</button>
+                        <span class="file-upload-name">No file chosen</span>
+                        <input type="file" id="fileUpload" name="logo" accept="image/*" required>
+                    </div>
+                </div>
+
+                <div class="form-group password-input-group">
+                    <label for="passwordInput" class="form-label">Password</label>
+                    <input type="password" name="password" id="passwordInput" class="form-control" placeholder="Enter password" required>
+                    <span class="password-toggle">Show</span>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-lg btn-block shadow-md hover:shadow-lg">Submit Request</button>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}
+
+
+{% block bodyscripts %}{% endblock %}
