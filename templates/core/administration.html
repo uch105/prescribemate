@@ -13,21 +13,28 @@ Administration page
 {% endblock %}
 
 {% block body %}
-<div class="container">
-    <div class="user-type-lists">
-        <a onclick="showContent('1')" class="br-3 border-bt-blue fw-700 fs-14 clr-white bg-blue">Add a stuff</a>
-        <a onclick="showContent('2')" class="br-3 border-bt-blue fw-700 fs-14 clr-blue bg-white">List of stuffs</a>
-    </div>
-    <div class="content" id="1">
-        <form action="{% host_url 'administration' host 'www' %}" method="POST">
-            {% csrf_token %}
-            <select name="role" aria-placeholder="Select a role" class="br-3 border-card bg-white clr-black fs-12 fw-500 shadow-card pd-btn">
-                <option value="doctor_as_dev">Doctor as Dev</option>
-            </select>
-            <input type="text" name='name' placeholder="Name" class="br-3 border-card bg-white clr-black fs-12 fw-500 shadow-card pd-btn">
-            <input type="submit" value="Confirm adding staff" class="bg-blue fw-700 fs-12 pd-btn br-3 clr-white">
-        </form>
-    </div>
+<h3 class="margin-top-md text-center">Hospital Registration Requests</h3>
+<div class="card shadow-sm padding-xxl">
+<table class="full-width">
+    <thead>
+    <tr class="bg-dark text-light">
+        <th class="padding-sm text-left">Brand Name</th>
+        <th class="padding-sm text-left">Reg Code</th>
+        <th class="padding-sm text-left">Legal Contact</th>
+        <th class="padding-sm text-left">Approval Link</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for hreq in hrequests %}
+    <tr class="bg-light padding-sm">
+        <td class="padding-sm">{{ hreq.brand_name }}</td>
+        <td class="padding-sm">{{ hreq.reg_code }}</td>
+        <td class="padding-sm">{{ hreq.legal_contact }}</td>
+        <td class="padding-sm"><a href="{% url 'hospitalregistrationrequestapprove' pk=hreq.id %}" class="text-primary">Approve</a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
 </div>
 {% endblock %}
 

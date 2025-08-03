@@ -1,0 +1,175 @@
+{% load static %}
+{% load hosts %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    {% block seo %}{% endblock %}
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'files/css/hms.css' %}">
+    {% block headscripts %}{% endblock %}
+    {% block headlinks %}{% endblock %}
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="navbar-header">
+            <div class="logo">
+                <img src="{{ user.hospital.logo.url }}" alt="{{ user.hospital.brand_name }}" width="100px" height="auto">
+            </div>
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="fas fa-user-injured"></i>
+                    <span>Patients</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="fas fa-user-md"></i>
+                    <span>Doctors</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="fas fa-calendar-check"></i>
+                    <span>Appointments</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="fas fa-pills"></i>
+                    <span>Pharmacy</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="fas fa-file-medical"></i>
+                    <span>Medical Records</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    {% if messages %}
+    <!-- Messages Container (for Django messages) -->
+    <div id="messages-container" class="messages-container">
+        {% for message in messages %}
+        <div class="message {{ message.tags }}">
+            <span class="message-text">{{ message }}</span>
+            <button class="close-btn">&times;</button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <button class="mobile-menu-toggle" id="mobileMenuToggle">
+            <i class="fas fa-bars"></i>
+        </button>
+        
+        {% block body %}{% endblock %}
+
+        <footer class="bg-light padding-md text-center text-small text-color-dark margin-top-xl">
+            <small>© 2025 PrescribeMate. All Rights Reserved.</small>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navbar = document.getElementById('navbar');
+            const menuToggle = document.getElementById('menuToggle');
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const mainContent = document.getElementById('mainContent');
+
+            // Get all section buttons and content sections
+            const buttons = document.querySelectorAll('.section-button');
+            const sections = document.querySelectorAll('.content-section');
+            
+            // Toggle menu in mobile view
+            function toggleMenu() {
+                navbar.classList.toggle('active');
+                
+                // Toggle between hamburger and close icon
+                if (navbar.classList.contains('active')) {
+                    menuToggle.innerHTML = '<i class="fas fa-times"></i>';
+                    mobileMenuToggle.style.display = 'none';
+                } else {
+                    menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                    mobileMenuToggle.style.display = 'block';
+                }
+            }
+            
+            // Only add event listeners for mobile view
+            if (window.innerWidth <= 768) {
+                mobileMenuToggle.addEventListener('click', toggleMenu);
+                menuToggle.addEventListener('click', toggleMenu);
+            }
+            
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    navbar.classList.remove('active');
+                    navbar.style.transform = 'translateX(0)';
+                    menuToggle.innerHTML = '<i class="fas fa-times"></i>';
+                    mobileMenuToggle.style.display = 'none';
+                } else {
+                    if (!navbar.classList.contains('active')) {
+                        navbar.style.transform = 'translateX(-100%)';
+                        menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                        mobileMenuToggle.style.display = 'block';
+                    }
+                }
+            });
+            
+            // Add click event listeners to buttons
+            buttons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons and sections
+                    buttons.forEach(btn => btn.classList.remove('active'));
+                    sections.forEach(section => section.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Show corresponding section
+                    const sectionId = this.getAttribute('data-section');
+                    document.getElementById(sectionId).classList.add('active');
+                });
+            });
+        });
+    </script>
+
+    <script src="{% static 'files/js/master.js' %}"></script>
+
+    {% block bodyscripts %}{% endblock %}
+
+</body>
+</html>

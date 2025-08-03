@@ -1,0 +1,44 @@
+{% extends 'hospitals/base.html' %}
+
+{% load static %}
+
+{% load hosts %}
+
+{% block title %}Hospital Employee Login Form{% endblock %}
+
+{% block seo %}{% endblock %}
+
+{% block headscripts %}{% endblock %}
+
+{% block headlinks %}{% endblock %}
+
+{% block navbar %}
+<div style="text-align: center;">
+    <img src="{% static 'files/images/logo.svg' %}" alt="Prescribemate Logo" width="100px" height="100px" style="padding: 20px;">
+</div>
+{% endblock %}
+
+{% block body %}
+<!-- Forms Section -->
+    <section class="container">
+        <h2 class="text-heading-2 text-center margin-bottom-xl">Login Area</h2>
+        <form method="POST" action="{% host_url 'hospital_login' host 'hospitals' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="textInput" class="form-label">Username</label>
+                <input type="text" id="textInput" name="username" class="form-control" placeholder="Enter username" required>
+                <small class="form-text">This is a helpful text for the input.</small>
+            </div>
+
+            <div class="form-group password-input-group">
+                <label for="passwordInput" class="form-label">Password</label>
+                <input type="password" id="passwordInput" class="form-control" name="password" placeholder="Enter password" required>
+                <span class="password-toggle">Show</span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit Form</button>
+        </form>
+    </section>
+{% endblock %}
+
+{% block bodyscripts %}{% endblock %}

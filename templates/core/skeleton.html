@@ -1,0 +1,71 @@
+{% extends 'hospitals/base.html' %}
+
+{% load static %}
+
+{% load hosts %}
+
+{% block title %}{% endblock %}
+
+{% block seo %}{% endblock %}
+
+{% block headscripts %}{% endblock %}
+
+{% block headlinks %}{% endblock %}
+
+{% block navbar %}{% endblock %}
+
+{% block body %}{% endblock %}
+
+{% block bodyscripts %}{% endblock %}
+
+<!-- hms skeleton -->
+    <div class="dashboard-container">
+        <div class="button-group">
+            <button class="section-button active" data-section="data-section">Metrics Data</button>
+            <button class="section-button" data-section="form-section">Form</button>
+            <!-- Additional buttons can be added dynamically -->
+            <!-- <button class="section-button" data-section="some-section">Some</button> -->
+        </div>
+        
+        <!-- Data Section -->
+        <div id="data-section" class="content-section active">
+        </div>
+
+        <!-- Data Section -->
+        <div id="form-section" class="content-section">
+        </div>
+
+        <!-- Some Section -->
+        <!-- 
+
+        <div id="some-section" class="content-section">
+        </div>
+
+        -->
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // Get all section buttons and content sections
+            const buttons = document.querySelectorAll('.section-button');
+            const sections = document.querySelectorAll('.content-section');
+
+            // Add click event listeners to buttons
+            buttons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons and sections
+                    buttons.forEach(btn => btn.classList.remove('active'));
+                    sections.forEach(section => section.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Show corresponding section
+                    const sectionId = this.getAttribute('data-section');
+                    document.getElementById(sectionId).classList.add('active');
+                });
+            });
+        });
+    </script>

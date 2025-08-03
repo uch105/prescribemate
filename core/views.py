@@ -9,13 +9,16 @@ sys.path.append(project_root)
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'prescribemate.settings')
 django.setup()
 
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,HttpResponse
 from .models import *
+from common.models import *
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.hashers import make_password
 import random
 import string
+
+User = get_user_model()
 
 def generate_unique_id(prefix="id_", length=16, include_uppercase=True, include_lowercase=True, include_numbers=True, include_special=True):
     if length <= len(prefix):
@@ -40,53 +43,11 @@ def generate_unique_id(prefix="id_", length=16, include_uppercase=True, include_
 
     return prefix + random_part
 
-def login_view(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            messages.add_message(request, messages.SUCCESS, 'Logged In successfully')
-            next_url = request.POST.get('next', '/')
-            return redirect(next_url)
-        else:
-            messages.add_message(request, messages.ERROR, "Username and/or password didn't match")
-            return redirect('login')
-
-    next_url = request.GET.get('next', '')
-    return render(request, 'core/login.html', {'next': next_url})
-
-def logout_view(request):
-    logout(request)
-    messages.add_message(request, messages.INFO, 'Logged out successfully')
-    return redirect('home')
-
-@login_required
-def doctor_as_dev(request):
-    if request.method == "POST":
-        generic = request.POST.get("generic")
-        indication = request.POST.get("indication")
-        contraindication = request.POST.get("contraindication")
-        side_effect = request.POST.get("side_effect")
-
-        drugs = Drug.objects.filter(generic=generic)
-        for drug in drugs:
-            drug.indication = indication
-            drug.contraindication = contraindication
-            drug.side_effect = side_effect
-        
-        messages.add_message(request,messages.INFO, f"Properties for {generic} added successfully!")
-        return redirect('index')
-        
-
-    with open('/home/uch/prescribemate/core/corefiles/generic_names.xlsx','r') as file:
-        lines = [line for line in file]
-        generics = [line.rstrip('\n') for line in lines]
-    context = {
-        'generics': generics,
-    }
-    return render(request,'core/doctor_as_dev.html',context)
+def generate_username(prefix):
+    while True:
+        username = generate_unique_id(prefix=prefix, include_special=False)
+        if not User.objects.filter(username=username).exists():
+            return username
 
 def terms(request):
     return render(request, 'core/terms.html')
@@ -94,21 +55,83 @@ def terms(request):
 def privacy(request):
     return render(request, 'core/privacy.html')
 
-@login_required
-def sitetraffic(request):
-    context = {}
-    return render(request, 'core/sitetraffic.html', context)
+def pricing(request):
+    return HttpResponse("Pricing page is under construction.")
 
-@login_required
+def blogs(request):
+    return HttpResponse("Blogs page is under construction.")
+
+def contact(request):
+    return HttpResponse("Contact page is under construction.")
+
+def about(request):
+    return HttpResponse("About page is under construction.")
+
+def careers(request):
+    return HttpResponse("Careers page is under construction.")
+
+def press(request):
+    return HttpResponse("Press page is under construction.")
+
+def api_docs(request):
+    return HttpResponse("API Documentation page is under construction.")
+
+def home(request):
+    return render(request, 'core/landing.html')
+
+@login_required(login_url='/behind-the-desk/login/')
 def administration(request):
-    if request.method == "POST":
-        role = request.POST.get('role','')
-        name = request.POST.get('name','')
+    hrequests = HospitalRegistrationRequest.objects.all()
 
-    context = {}
+    context = {
+        'hrequests': hrequests,
+    }
     return render(request, 'core/administration.html', context)
 
-@login_required
-def lookup(request):
-    context = {}
-    return render(request, 'core/lookup.html', context)
+@login_required(login_url='/behind-the-desk/login/')
+def hospitalregistrationrequestapprove(request, pk):
+    try:
+        hospital = HospitalRegistrationRequest.objects.get(id=pk)
+        new_hospital = Hospital.objects.filter(reg_code=hospital.reg_code).first()
+        
+        if not new_hospital:
+            messages.error(request, "Matching hospital not found")
+            return redirect('administration')
+
+        new_hospital.legal_contact = hospital.legal_contact
+        new_hospital.verified = True
+
+        if hospital.logo:
+            if new_hospital.logo:
+                new_hospital.logo.close()
+                new_hospital.logo.delete(save=False)
+
+            new_hospital.logo = hospital.logo
+            hospital.logo = None
+        
+        new_hospital.save()
+        
+        HospitalWallet.objects.create(
+            hospital=new_hospital,
+            balance=0.0,
+        )
+
+        username = f"admin-{new_hospital.reg_code}"
+        password = make_password(hospital.password)
+
+        User.objects.create(username=username, role=User.Roles.HOSPITAL_ADMIN, name=f"Admin - {new_hospital.brand_name}", password=password)
+        
+        HospitalEmployee.objects.create(
+            user=User.objects.get(username=username),
+            hospital=new_hospital,
+            role = User.objects.get(username=username).role,
+        )
+
+        hospital.delete()
+        
+        messages.success(request, "Hospital verified successfully")
+    
+    except Exception as e:
+        messages.error(request, f"Error: {str(e)}")
+    
+    return redirect('administration')

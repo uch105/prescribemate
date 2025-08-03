@@ -1,18 +1,32 @@
 {% load static %}
 {% load hosts %}
-
-<nav>
-    <div>
-        <img src="{% static 'files/images/logo.png' %}" alt="Prescribemate">
+<nav class="bg-light shadow-md padding-md">
+    <div class="flex flex-column flex-align-center">
+        <!-- Centered Logo -->
+        <div class="margin-bottom-md">
+            <a href="{% host_url 'home' host 'www' %}">
+                <img src="{% static 'files/images/logo.svg' %}" height="80" width="80" alt="Prescribemate">
+            </a>
+        </div>
+        
+        {% if 'admin' in request.path %}
+        <!-- Navigation Links Row -->
+        <div class="flex flex-justify-center">
+            <ul class="flex gap-lg list-style-none">
+                <li>
+                    <a href="{% host_url 'administration' host 'www' %}" 
+                       class="btn {% if 'administration' in request.path %}bg-primary text-light{% else %}btn-outline{% endif %}">
+                        Administration
+                    </a>
+                </li>
+                <li>
+                    <a href="#" 
+                       class="btn {% if 'other' in request.path %}bg-primary text-light{% else %}btn-outline{% endif %}">
+                        Other links
+                    </a>
+                </li>
+            </ul>
+        </div>
+        {% endif %}
     </div>
-    {% if 'terms' or 'privacy' in request.path %}
-    {% else %}
-    <div>
-        <ul>
-            <li><a href="{% host_url 'administration' host 'www' %}" {% if 'administration' in request.path %} class="clr-white bg-blue fs-16 pd-btn br-3" {% else %} class="clr-black border-bt-blue fs-16 pd-btn br-3" {% endif %}>Administration</a></li>
-            <li><a href="{% host_url 'sitetraffic' host 'www' %}" {% if 'sitetraffic' in request.path %} class="clr-white bg-blue fs-16 pd-btn br-3" {% else %} class="clr-black border-bt-blue fs-16 pd-btn br-3" {% endif %}>Site traffic</a></li>
-            <li><a href="{% host_url 'lookup' host 'www' %}" {% if 'lookup' in request.path %} class="clr-white bg-blue fs-16 pd-btn br-3" {% else %} class="clr-black border-bt-blue fs-16 pd-btn br-3" {% endif %}>Look-up</a></li>
-        </ul>
-    </div>
-    {% endif %}
 </nav>

@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom CSS Framework Demo</title>
+    <link rel="stylesheet" href="custom_css.txt">
+    <!-- Optional: For icons like eye for password toggle, you might use Font Awesome -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> -->
+    <style>
+        /* Just for demo purposes to make sections visible */
+        section {
+            padding: var(--spacing-xxl) 0;
+            border-bottom: 1px solid var(--border-color-light);
+        }
+        body.dark-mode section {
+            border-color: var(--border-color-dark);
+        }
+        .hero-section {
+            background-color: var(--primary-color);
+            color: var(--light-color);
+            text-align: center;
+            padding: var(--spacing-xxl) 0;
+        }
+        .hero-section h1 {
+            color: var(--light-color);
+        }
+        .slider-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .card-slider .card {
+            height: 100%; /* Ensure cards in slider have consistent height */
+            display: flex;
+            flex-direction: column;
+        }
+        .card-slider .card-body {
+            flex-grow: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Messages Container (for Django messages) -->
+    <div id="messages-container" class="messages-container">
+        <!-- Messages will be dynamically added here by JavaScript -->
+        <!-- Example of a static message for testing: -->
+        <div class="message message-success">
+            <span class="message-text">This is a success message! It will fade out.</span>
+            <button class="close-btn">&times;</button>
+        </div>
+        <div class="message message-error">
+            <span class="message-text">An error occurred. Please try again.</span>
+            <button class="close-btn">&times;</button>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="#" class="navbar-brand">MyBrand</a>
+        <div class="navbar-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul class="navbar-menu">
+            <li class="navbar-item"><a href="#">Home</a></li>
+            <li class="navbar-item">
+                Services
+                <ul class="navbar-submenu">
+                    <li class="navbar-subitem"><a href="#">Web Design</a></li>
+                    <li class="navbar-subitem"><a href="#">Development</a></li>
+                    <li class="navbar-subitem"><a href="#">SEO</a></li>
+                </ul>
+            </li>
+            <li class="navbar-item">
+                Products
+                <ul class="navbar-submenu">
+                    <li class="navbar-subitem"><a href="#">Product A</a></li>
+                    <li class="navbar-subitem"><a href="#">Product B</a></li>
+                </ul>
+            </li>
+            <li class="navbar-item"><a href="#">About</a></li>
+            <li class="navbar-item"><a href="#">Contact</a></li>
+            <li class="navbar-item">
+                <label class="dark-mode-toggle">
+                    <span class="icon">☀️</span> Dark Mode
+                    <input type="checkbox" id="darkModeToggle">
+                    <span class="slider"></span>
+                </label>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <h1 class="text-heading-1">Welcome to Our Custom Framework</h1>
+            <p class="text-lead margin-bottom-lg">A powerful and flexible CSS solution for your next project.</p>
+            <button class="btn btn-secondary btn-lg">Learn More</button>
+            <button class="btn btn-outline btn-lg">Get Started</button>
+        </div>
+    </section>
+
+    <!-- Typography Section -->
+    <section class="container">
+        <h2 class="text-heading-2 text-center margin-bottom-xl">Typography Examples</h2>
+        <p class="text-lead">This is a lead paragraph, designed to stand out and introduce content.</p>
+        <h1 class="text-heading-1">Heading 1 Example</h1>
+        <h2 class="text-heading-2">Heading 2 Example</h2>
+        <h3 class="text-heading-3">Heading 3 Example</h3>
+        <h4 class="text-heading-4">Heading 4 Example</h4>
+        <h5 class="text-heading-5">Heading 5 Example</h5>
+        <h6 class="text-heading-6">Heading 6 Example</h6>
+        <p class="text-base">This is a base paragraph. Lorem ipsum dolor sit amet, consectetur adipiscing elit. <span class="text-bold">This text is bold.</span> <span class="text-italic">This text is italic.</span> <span class="text-underline">This text is underlined.</span></p>
+        <p class="text-small">This is small text for footnotes or secondary information.</p>
+        <p class="text-center text-color-primary">This text is centered and primary colored.</p>
+        <p class="text-right text-color-success">This text is right-aligned and success colored.</p>
+        <p class="text-uppercase">This text is uppercase.</p>
+        <p class="text-capitalize">this text is capitalize.</p>
+    </section>
+
+    <!-- Buttons Section -->
+    <section class="container">
+        <h2 class="text-heading-2 text-center margin-bottom-xl">Button Styles</h2>
+        <div class="flex flex-justify-center flex-wrap gap-md">
+            <button class="btn btn-primary">Primary Button</button>
+            <button class="btn btn-secondary">Secondary Button</button>
+            <button class="btn btn-outline">Outline Button</button>
+            <button class="btn btn-danger">Danger Button</button>
+            <button class="btn btn-primary btn-sm">Small Button</button>
+            <button class="btn btn-secondary btn-lg">Large Button</button>
+            <button class="btn btn-primary btn-block margin-top-md">Block Button</button>
+        </div>
+    </section>
+
+    <!-- Cards Section -->
+    <section class="container grid grid-cols-3 grid-md-cols-2 grid-sm-cols-1 gap-lg">
+        <h2 class="text-heading-2 col-span-full text-center margin-bottom-xl">Card Examples</h2>
+        <div class="card">
+            <div class="card-header">
+                <h3 class="text-heading-4">Card Title</h3>
+            </div>
+            <div class="card-body">
+                <p>This is the body of the card. It can contain any content, like text, images, or other components.</p>
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-primary">Action</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://via.placeholder.com/400x200" alt="Card Image" class="card-image">
+            <div class="card-body">
+                <h3 class="text-heading-4">Card with Image</h3>
+                <p>A beautiful image at the top of the card, followed by some descriptive text.</p>
+            </div>
+        </div>
+
+        <div class="card bg-info text-color-light">
+            <div class="card-body">
+                <h3 class="text-heading-4 text-color-light">Colored Card</h3>
+                <p>This card uses a background utility class to change its color.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Forms Section -->
+    <section class="container">
+        <h2 class="text-heading-2 text-center margin-bottom-xl">Form Elements</h2>
+        <form>
+            <div class="form-group">
+                <label for="textInput" class="form-label">Text Input</label>
+                <input type="text" id="textInput" class="form-control" placeholder="Enter text here">
+                <small class="form-text">This is a helpful text for the input.</small>
+            </div>
+
+            <div class="form-group password-input-group">
+                <label for="passwordInput" class="form-label">Password</label>
+                <input type="password" id="passwordInput" class="form-control" placeholder="Enter password">
+                <span class="password-toggle">Show</span>
+            </div>
+
+            <div class="form-group">
+                <label for="emailInput" class="form-label">Email Address</label>
+                <input type="email" id="emailInput" class="form-control form-control-lg" placeholder="Enter email">
+            </div>
+
+            <div class="form-group">
+                <label for="fileUpload" class="form-label">File Upload</label>
+                <div class="file-upload-wrapper">
+                    <button type="button" class="file-upload-button">Choose File</button>
+                    <span class="file-upload-name">No file chosen</span>
+                    <input type="file" id="fileUpload">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="dateInput" class="form-label">Date</label>
+                <input type="date" id="dateInput" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="timeInput" class="form-label">Time</label>
+                <input type="time" id="timeInput" class="form-control">
+            </div>
+
+            <div class="form-group autocomplete-container">
+                <label for="autocompleteInput" class="form-label">Autocomplete Input</label>
+                <input type="text" id="autocompleteInput" class="form-control autocomplete-input" placeholder="Type to search...">
+                <div class="autocomplete-suggestions"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="selectOption" class="form-label">Select Option</label>
+                <select id="selectOption" class="form-control">
+                    <option value="">-- Please choose an option --</option>
+                    <option value="option1">Option 1</option>
+                    <option value="option2">Option 2</option>
+                    <option value="option3">Option 3</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="textareaInput" class="form-label">Textarea</label>
+                <textarea id="textareaInput" class="form-control" rows="5" placeholder="Enter your message..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit Form</button>
+        </form>
+    </section>
+
+    <!-- Image Endless Slider Section -->
+    <section class="container">
+        <h2 class="text-heading-2 text-center margin-bottom-xl">Image Gallery Slider</h2>
+        <div class="slider-container image-slider">
+            <div class="slider-track">
+                <div class="slider-item"><img src="https://via.placeholder.com/300x200/FF5733/FFFFFF?text=Image+1" alt="Image 1"></div>
+                <div class="slider-item"><img src="https://via.placeholder.com/300x200/33FF57/FFFFFF?text=Image+2" alt="Image 2"></div>
+                <div class="slider-item"><img src="https://via.placeholder.com/300x200/3357FF/FFFFFF?text=Image+3" alt="Image 3"></div>
+                <div class="slider-item"><img src="https://via.placeholder.com/300x200/FF33A1/FFFFFF?text=Image+4" alt="Image 4"></div>
+                <div class="slider-item"><img src="https://via.placeholder.com/300x200/A133FF/FFFFFF?text=Image+5" alt="Image 5"></div>
+                <div class="slider-item"><img src="https://via.placeholder.com/300x200/33FFF5/FFFFFF?text=Image+6" alt="Image 6"></div>
+                <!-- Duplicate items for seamless looping -->
+                <div class="slider-item"><img src="https://via.placeholder.com/300x200/FF5733/FFFFFF?text=Image+1" alt="Image 1"></div>
+                <div class="slider-item"><img src="https://via.placeholder.com/300x200/33FF57/FFFFFF?text=Image+2" alt="Image 2"></div>
+                <div class="slider-item"><img src="https://via.placeholder.com/300x200/3357FF/FFFFFF?text=Image+3" alt="Image 3"></div>
+                <div class="slider-item"><img src="https://via.placeholder.com/300x200/FF33A1/FFFFFF?text=Image+4" alt="Image 4"></div>
+                <div class="slider-item"><img src="https://via.placeholder.com/300x200/A133FF/FFFFFF?text=Image+5" alt="Image 5"></div>
+                <div class="slider-item"><img src="https://via.placeholder.com/300x200/33FFF5/FFFFFF?text=Image+6" alt="Image 6"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Card Endless Slider Section (e.g., Reviews/Blog Posts) -->
+    <section class="container">
+        <h2 class="text-heading-2 text-center margin-bottom-xl">Reviews / Blog Posts Slider</h2>
+        <div class="slider-container card-slider">
+            <div class="slider-track">
+                <div class="slider-item">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="text-heading-5">"Excellent Service!"</h4>
+                            <p class="text-small">"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</p>
+                            <p class="text-bold margin-top-sm">- Jane Doe</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="slider-item">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="text-heading-5">"Highly Recommended"</h4>
+                            <p class="text-small">"Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."</p>
+                            <p class="text-bold margin-top-sm">- John Smith</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="slider-item">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="text-heading-5">"Game Changer!"</h4>
+                            <p class="text-small">"Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."</p>
+                            <p class="text-bold margin-top-sm">- Alice Johnson</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="slider-item">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="text-heading-5">"Fantastic Experience"</h4>
+                            <p class="text-small">"Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+                            <p class="text-bold margin-top-sm">- Bob Williams</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Duplicate items for seamless looping -->
+                <div class="slider-item">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="text-heading-5">"Excellent Service!"</h4>
+                            <p class="text-small">"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</p>
+                            <p class="text-bold margin-top-sm">- Jane Doe</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="slider-item">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="text-heading-5">"Highly Recommended"</h4>
+                            <p class="text-small">"Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."</p>
+                            <p class="text-bold margin-top-sm">- John Smith</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="slider-item">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="text-heading-5">"Game Changer!"</h4>
+                            <p class="text-small">"Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."</p>
+                            <p class="text-bold margin-top-sm">- Alice Johnson</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="slider-item">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="text-heading-5">"Fantastic Experience"</h4>
+                            <p class="text-small">"Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+                            <p class="text-bold margin-top-sm">- Bob Williams</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Specific Examples -->
+    <section class="container">
+        <h2 class="text-heading-2 text-center margin-bottom-xl">Project Specific Examples</h2>
+
+        <div class="healthcare-section margin-bottom-xxl">
+            <h3 class="text-heading-3 text-center margin-bottom-lg">Healthcare System Section</h3>
+            <div class="grid grid-cols-2 grid-md-cols-1 gap-lg">
+                <div class="card healthcare-card">
+                    <div class="card-body">
+                        <h4 class="text-heading-5">Patient Dashboard</h4>
+                        <p>Overview of patient records, appointments, and medical history.</p>
+                        <button class="btn btn-success margin-top-md">View Details</button>
+                    </div>
+                </div>
+                <div class="card healthcare-card">
+                    <div class="card-body">
+                        <h4 class="text-heading-5">Appointment Scheduling</h4>
+                        <p>Easily book and manage appointments for patients and doctors.</p>
+                        <button class="btn btn-info margin-top-md">Schedule Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="scientific-portal-header margin-bottom-xxl">
+            <h3 class="text-heading-3 text-color-light">Scientific Research Portal</h3>
+            <p class="text-color-light">Explore the latest scientific data and publications.</p>
+        </div>
+        <div class="container margin-bottom-xxl">
+            <h4 class="text-heading-4">Research Data Table</h4>
+            <table class="scientific-data-table">
+                <thead>
+                    <tr>
+                        <th>Study ID</th>
+                        <th>Topic</th>
+                        <th>Status</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>#001</td>
+                        <td>Quantum Physics</td>
+                        <td>Completed</td>
+                        <td>2023-01-15</td>
+                    </tr>
+                    <tr>
+                        <td>#002</td>
+                        <td>Genomic Sequencing</td>
+                        <td>In Progress</td>
+                        <td>2023-03-20</td>
+                    </tr>
+                    <tr>
+                        <td>#003</td>
+                        <td>Climate Modeling</td>
+                        <td>Pending</td>
+                        <td>2023-05-10</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="grid grid-cols-3 grid-md-cols-2 grid-sm-cols-1 gap-lg margin-bottom-xxl">
+            <h3 class="text-heading-3 col-span-full text-center">Portfolio Website Showcase</h3>
+            <div class="portfolio-item">
+                <div class="portfolio-image">
+                    <img src="https://via.placeholder.com/400x250/8E44AD/FFFFFF?text=Project+Alpha" alt="Project Alpha">
+                </div>
+                <div class="card-body">
+                    <h4 class="portfolio-title">Project Alpha</h4>
+                    <p class="text-small">A web application for data visualization.</p>
+                    <button class="btn btn-primary btn-sm margin-top-sm">View Project</button>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <div class="portfolio-image">
+                    <img src="https://via.placeholder.com/400x250/27AE60/FFFFFF?text=Project+Beta" alt="Project Beta">
+                </div>
+                <div class="card-body">
+                    <h4 class="portfolio-title">Project Beta</h4>
+                    <p class="text-small">Mobile app design for a fitness tracker.</p>
+                    <button class="btn btn-primary btn-sm margin-top-sm">View Project</button>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <div class="portfolio-image">
+                    <img src="https://via.placeholder.com/400x250/E67E22/FFFFFF?text=Project+Gamma" alt="Project Gamma">
+                </div>
+                <div class="card-body">
+                    <h4 class="portfolio-title">Project Gamma</h4>
+                    <p class="text-small">E-commerce platform development.</p>
+                    <button class="btn btn-primary btn-sm margin-top-sm">View Project</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-4 grid-lg-cols-3 grid-md-cols-2 grid-sm-cols-1 gap-lg margin-bottom-xxl">
+            <h3 class="text-heading-3 col-span-full text-center">E-commerce Product Listing</h3>
+            <div class="product-card">
+                <img src="https://via.placeholder.com/200x200/3498DB/FFFFFF?text=Product+X" alt="Product X" class="rounded-md margin-bottom-md">
+                <h4 class="text-heading-5">Product X</h4>
+                <p class="text-small">High-quality gadget with advanced features.</p>
+                <p class="product-price">$99.99</p>
+                <button class="btn add-to-cart-btn">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="https://via.placeholder.com/200x200/2ECC71/FFFFFF?text=Product+Y" alt="Product Y" class="rounded-md margin-bottom-md">
+                <h4 class="text-heading-5">Product Y</h4>
+                <p class="text-small">Stylish accessory for everyday use.</p>
+                <p class="product-price">$24.50</p>
+                <button class="btn add-to-cart-btn">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="https://via.placeholder.com/200x200/E74C3C/FFFFFF?text=Product+Z" alt="Product Z" class="rounded-md margin-bottom-md">
+                <h4 class="text-heading-5">Product Z</h4>
+                <p class="text-small">Durable and reliable outdoor gear.</p>
+                <p class="product-price">$149.00</p>
+                <button class="btn add-to-cart-btn">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <img src="https://via.placeholder.com/200x200/9B59B6/FFFFFF?text=Product+A" alt="Product A" class="rounded-md margin-bottom-md">
+                <h4 class="text-heading-5">Product A</h4>
+                <p class="text-small">Innovative solution for modern living.</p>
+                <p class="product-price">$75.00</p>
+                <button class="btn add-to-cart-btn">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-3 grid-md-cols-2 grid-sm-cols-1 gap-lg">
+            <h3 class="text-heading-3 col-span-full text-center">E-learning Course Cards</h3>
+            <div class="card course-card">
+                <img src="https://via.placeholder.com/400x200/1ABC9C/FFFFFF?text=Web+Dev" alt="Web Development Course" class="card-image">
+                <div class="card-body">
+                    <h4 class="course-title">Complete Web Development Bootcamp</h4>
+                    <p class="text-small">Learn HTML, CSS, JavaScript, and more to build amazing websites.</p>
+                    <div class="course-progress-bar">
+                        <div class="course-progress-bar-fill" style="width: 75%;"></div>
+                    </div>
+                    <p class="text-small margin-top-xs">75% Complete</p>
+                    <button class="btn btn-info btn-sm margin-top-md">Continue Course</button>
+                </div>
+            </div>
+            <div class="card course-card">
+                <img src="https://via.placeholder.com/400x200/F1C40F/FFFFFF?text=Data+Science" alt="Data Science Course" class="card-image">
+                <div class="card-body">
+                    <h4 class="course-title">Introduction to Data Science with Python</h4>
+                    <p class="text-small">Master data analysis, machine learning, and visualization.</p>
+                    <div class="course-progress-bar">
+                        <div class="course-progress-bar-fill" style="width: 40%;"></div>
+                    </div>
+                    <p class="text-small margin-top-xs">40% Complete</p>
+                    <button class="btn btn-info btn-sm margin-top-md">Continue Course</button>
+                </div>
+            </div>
+            <div class="card course-card">
+                <img src="https://via.placeholder.com/400x200/9B59B6/FFFFFF?text=UX+Design" alt="UX Design Course" class="card-image">
+                <div class="card-body">
+                    <h4 class="course-title">UX/UI Design Fundamentals</h4>
+                    <p class="text-small">Create intuitive and user-friendly interfaces for digital products.</p>
+                    <div class="course-progress-bar">
+                        <div class="course-progress-bar-fill" style="width: 90%;"></div>
+                    </div>
+                    <p class="text-small margin-top-xs">90% Complete</p>
+                    <button class="btn btn-info btn-sm margin-top-md">Continue Course</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>

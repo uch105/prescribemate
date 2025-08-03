@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+{% load hosts %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrescribeMate - Digital Healthcare Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles */
+        :root {
+            --primary: #2a6fdb;
+            --primary-dark: #1a56b7;
+            --secondary: #00c897;
+            --dark: #2d3748;
+            --light: #f7fafc;
+            --gray: #718096;
+            --light-gray: #e2e8f0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #ffffff;
+            overflow-x: hidden;
+        }
+        
+        /* Utility Classes */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            border: 2px solid var(--primary);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            border-color: var(--primary-dark);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+            text-align: center;
+        }
+        
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--gray);
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 50px;
+            margin-right: 10px;
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--light);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark);
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 180px 0 100px;
+            background: linear-gradient(135deg, #f0f7ff 0%, #e6f0ff 100%);
+        }
+        
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .hero-text {
+            flex: 1;
+            padding-right: 40px;
+        }
+        
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--gray);
+            margin-bottom: 2rem;
+            max-width: 500px;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .hero-image {
+            flex: 1;
+        }
+        
+        .hero-image img {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 10px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+            background-color: white;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .feature-card {
+            text-align: center;
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .feature-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .feature-desc {
+            color: var(--gray);
+        }
+        
+        /* How It Works Section */
+        .how-it-works {
+            padding: 100px 0;
+            background-color: var(--light);
+        }
+        
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+            position: relative;
+        }
+        
+        .step {
+            flex: 1;
+            text-align: center;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 20px;
+        }
+        
+        .step-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .step-desc {
+            color: var(--gray);
+            max-width: 250px;
+            margin: 0 auto;
+        }
+        
+        .steps-line {
+            position: absolute;
+            top: 30px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background-color: var(--light-gray);
+            z-index: 0;
+        }
+        
+        /* Platform Showcase */
+        .platform-showcase {
+            padding: 100px 0;
+            background-color: white;
+        }
+        
+        .platform-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+        
+        .tab-btn {
+            padding: 12px 25px;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--gray);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tab-btn.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .platform-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .platform-text {
+            flex: 1;
+        }
+        
+        .platform-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .platform-desc {
+            color: var(--gray);
+            margin-bottom: 30px;
+        }
+        
+        .platform-features {
+            list-style: none;
+        }
+        
+        .platform-features li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .platform-features i {
+            color: var(--secondary);
+            margin-right: 10px;
+            margin-top: 3px;
+        }
+        
+        .platform-image {
+            flex: 1;
+        }
+        
+        .platform-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 100px 0;
+            background-color: var(--light);
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .testimonial-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            color: var(--dark);
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .testimonial-text::before {
+            content: '"';
+            font-size: 4rem;
+            color: var(--light-gray);
+            position: absolute;
+            top: -20px;
+            left: -15px;
+            z-index: 0;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 15px;
+            object-fit: cover;
+        }
+        
+        .author-info h4 {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .author-info p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+        
+        .cta-subtitle {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            opacity: 0.9;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .cta .btn-outline {
+            color: white;
+            border-color: white;
+        }
+        
+        .cta .btn-outline:hover {
+            background-color: white;
+            color: var(--primary);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 80px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .footer-logo img {
+            height: 50px;
+            margin-right: 10px;
+        }
+        
+        .footer-logo-text {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+        
+        .footer-about p {
+            opacity: 0.7;
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .footer-links h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-links h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary);
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .footer-newsletter p {
+            opacity: 0.7;
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+        
+        .newsletter-form {
+            display: flex;
+        }
+        
+        .newsletter-form input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 30px 0 0 30px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .newsletter-form button {
+            padding: 0 20px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 0 30px 30px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .newsletter-form button:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+            text-align: center;
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        .footer-bottom p a {
+            color: white;
+            text-decoration: underline;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero-content {
+                flex-direction: column;
+            }
+            
+            .hero-text {
+                padding-right: 0;
+                text-align: center;
+                margin-bottom: 40px;
+            }
+            
+            .hero-buttons {
+                justify-content: center;
+            }
+            
+            .platform-content {
+                flex-direction: column;
+            }
+            
+            .platform-text {
+                order: 2;
+                text-align: center;
+            }
+            
+            .platform-image {
+                order: 1;
+                margin-bottom: 40px;
+            }
+            
+            .platform-features {
+                display: inline-block;
+                text-align: left;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .steps {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .step {
+                margin-bottom: 40px;
+                max-width: 300px;
+            }
+            
+            .steps-line {
+                display: none;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .cta-buttons .btn {
+                width: 100%;
+                max-width: 250px;
+                margin-bottom: 15px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .hero-buttons .btn {
+                width: 100%;
+                max-width: 250px;
+                margin-bottom: 15px;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .platform-tabs {
+                flex-direction: column;
+            }
+            
+            .tab-btn {
+                border-bottom: none;
+                border-left: 3px solid transparent;
+                text-align: left;
+            }
+            
+            .tab-btn.active {
+                border-bottom: none;
+                border-left-color: var(--primary);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <img src="{% static 'files/images/logo.svg' %}" alt="PrescribeMate Logo"  width="50px" height="50px">
+                    <span class="logo-text">PrescribeMate</span>
+                </div>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="#" class="btn btn-outline">Get Started</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">Revolutionizing Healthcare with Digital Solutions</h1>
+                    <p class="hero-subtitle">PrescribeMate connects hospitals, doctors, patients, and pharmacies in one seamless platform, creating a paperless healthcare ecosystem powered by AI.</p>
+                    <div class="hero-buttons">
+                        <a href="#" class="btn btn-primary">Get our app</a>
+                        <a href="#platform" class="btn btn-outline">Learn More</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80" alt="Healthcare professionals using digital devices">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">Comprehensive Healthcare Platform</h2>
+            <p class="section-subtitle">PrescribeMate offers a complete suite of tools to modernize healthcare delivery and management</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-prescription-bottle-alt"></i>
+                    </div>
+                    <h3 class="feature-title">E-Prescription System</h3>
+                    <p class="feature-desc">Doctors can generate digital prescriptions that are instantly available to patients and pharmacies, eliminating paper prescriptions.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="feature-title">AI-Powered Diagnosis</h3>
+                    <p class="feature-desc">Our intelligent system assists doctors with diagnosis suggestions and recommends appropriate medications based on symptoms.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-hospital-user"></i>
+                    </div>
+                    <h3 class="feature-title">Patient Management</h3>
+                    <p class="feature-desc">Comprehensive patient records, medical history, and treatment plans all securely stored and easily accessible.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-pills"></i>
+                    </div>
+                    <h3 class="feature-title">Pharmacy Integration</h3>
+                    <p class="feature-desc">Seamless connection between doctors and pharmacies for instant prescription fulfillment and medication tracking.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-ambulance"></i>
+                    </div>
+                    <h3 class="feature-title">Emergency Services</h3>
+                    <p class="feature-desc">Integrated ambulance services, blood donor database, and emergency contact systems for critical situations.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3 class="feature-title">Location-Based Services</h3>
+                    <p class="feature-desc">Patients can find nearby doctors, hospitals, and pharmacies based on their current location.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How PrescribeMate Works</h2>
+            <p class="section-subtitle">A simple three-step process to transform your healthcare experience</p>
+            
+            <div class="steps">
+                <div class="steps-line"></div>
+                
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Register Your Account</h3>
+                    <p class="step-desc">General users, Hospitals, doctors, and pharmacies can register to join our network with verified credentials.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Connect With Community</h3>
+                    <p class="step-desc">Patients can find and connect with healthcare providers through our platform.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Digital Healthcare</h3>
+                    <p class="step-desc">Conduct consultations, issue e-prescriptions, manage records, buy medicines and process payments digitally.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Platform Showcase -->
+    <section class="platform-showcase" id="platform">
+        <div class="container">
+            <h2 class="section-title">One Platform, Multiple Solutions</h2>
+            <p class="section-subtitle">PrescribeMate provides tailored interfaces for each user type in the healthcare ecosystem</p>
+            
+            <div class="platform-tabs">
+                <button class="tab-btn active" data-tab="doctors">For Doctors</button>
+                <button class="tab-btn" data-tab="hospitals">For Hospitals</button>
+                <button class="tab-btn" data-tab="patients">For Patients</button>
+                <button class="tab-btn" data-tab="pharmacies">For Pharmacies</button>
+            </div>
+            
+            <div class="tab-content active" id="doctors">
+                <div class="platform-content">
+                    <div class="platform-text">
+                        <h3 class="platform-title">Doctor's Dashboard</h3>
+                        <p class="platform-desc">A powerful interface designed specifically for healthcare providers to manage their practice efficiently.</p>
+                        <ul class="platform-features">
+                            <li><i class="fas fa-check-circle"></i> <span>E-prescription system with AI-powered drug suggestions</span></li>
+                            <li><i class="fas fa-check-circle"></i> <span>Patient management with complete medical history</span></li>
+                            <li><i class="fas fa-check-circle"></i> <span>Appointment scheduling and calendar integration</span></li>
+                            <li><i class="fas fa-check-circle"></i> <span>Diagnostic tools and reference materials</span></li>
+                            <li><i class="fas fa-check-circle"></i> <span>Extensive drugs database and medical calculators</span></li>
+                        </ul>
+                    </div>
+                    <div class="platform-image">
+                        <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Doctor using digital platform">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="hospitals">
+                <div class="platform-content">
+                    <div class="platform-text">
+                        <h3 class="platform-title">Hospital Management</h3>
+                        <p class="platform-desc">Comprehensive tools to manage all aspects of hospital operations from a single platform.</p>
+                        <ul class="platform-features">
+                            <li><i class="fas fa-check-circle"></i> <span>Ward and bed management system</span></li>
+                            <li><i class="fas fa-check-circle"></i> <span>Outpatient and inpatient tracking</span></li>
+                            <li><i class="fas fa-check-circle"></i> <span>Staff scheduling and management</span></li>
+                            <li><i class="fas fa-check-circle"></i> <span>Inventory and equipment tracking</span></li>
+                            <li><i class="fas fa-check-circle"></i> <span>Financial reporting and analytics</span></li>
+                        </ul>
+                    </div>
+                    <div class="platform-image">
+                        <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Hospital management dashboard">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="patients">
+                <div class="platform-content">
+                    <div class="platform-text">
+                        <h3 class="platform-title">Patient Portal</h3>
+                        <p class="platform-desc">Empowering patients with easy access to their healthcare information and services.</p>
+                        <ul class="platform-features">
+                            <li><i class="fas fa-check-circle"></i> <span>Secure access to medical records</span></li>
+                            <li><i class="fas fa-check-circle"></i> <span>Appointment scheduling and reminders</span></li>
+                            <li><i class="fas fa-check-circle"></i> <span>Medication alerts and tracking</span></li>
+                            <li><i class="fas fa-check-circle"></i> <span>Find nearby healthcare providers</span></li>
+                            <li><i class="fas fa-check-circle"></i> <span>Nearby ambulance and emergency responses</span></li>
+                        </ul>
+                    </div>
+                    <div class="platform-image">
+                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Patient using mobile app">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="pharmacies">
+                <div class="platform-content">
+                    <div class="platform-text">
+                        <h3 class="platform-title">Pharmacy System</h3>
+                        <p class="platform-desc">Streamlined pharmacy operations with direct integration to healthcare providers.</p>
+                        <ul class="platform-features">
+                            <li><i class="fas fa-check-circle"></i> <span>Instant prescription receipt from doctors</span></li>
+                            <li><i class="fas fa-check-circle"></i> <span>Inventory management and alerts</span></li>
+                            <li><i class="fas fa-check-circle"></i> <span>Several online payment system available</span></li>
+                            <li><i class="fas fa-check-circle"></i> <span>Electronic billing processing</span></li>
+                            <li><i class="fas fa-check-circle"></i> <span>Financial reporting and analytics</span></li>
+                        </ul>
+                    </div>
+                    <div class="platform-image">
+                        <img src="https://images.unsplash.com/photo-1587854692152-cbe660dbde88?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80" alt="Pharmacy management system">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our Users Say</h2>
+            <p class="section-subtitle">Hear from healthcare professionals and patients who have transformed their experience with PrescribeMate</p>
+            
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">PrescribeMate has revolutionized how we manage prescriptions in our clinic. The AI drug suggestions have helped reduce medication errors significantly.</p>
+                    <div class="testimonial-author">
+                        <img src="{% static 'files/images/avatar3.jpeg' %}" alt="Dr. Sarah Johnson" class="author-avatar">
+                        <div class="author-info">
+                            <h4>Dr. Sarah Johnson</h4>
+                            <p>General Practitioner</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-text">As a patient with multiple chronic conditions, having all my medications and appointments in one place with alerts has been life-changing.</p>
+                    <div class="testimonial-author">
+                        <img src="{% static 'files/images/avatar2.jpeg' %}" alt="Robert Chen" class="author-avatar">
+                        <div class="author-info">
+                            <h4>Robert Chen</h4>
+                            <p>Patient</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-text">The hospital management features have saved us countless hours in administrative work, allowing us to focus more on patient care.</p>
+                    <div class="testimonial-author">
+                        <img src="{% static 'files/images/avatar1.jpeg' %}" alt="Maria Rodriguez" class="author-avatar">
+                        <div class="author-info">
+                            <h4>Maria Rodriguez</h4>
+                            <p>Hospital Administrator</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2 class="cta-title">Ready to Transform Your Healthcare Experience?</h2>
+            <p class="cta-subtitle">Join hundreds of healthcare providers and patients who are already benefiting from our digital healthcare platform.</p>
+            <div class="cta-buttons">
+                <a href="#" class="btn btn-primary">Get App Now</a>
+                <a href="{% host_url 'hospital_landing' host 'hospitals' %}" class="btn btn-outline">Join As Hospital</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <img src="{% static 'files/images/logo.svg' %}" alt="PrescribeMate Logo" width="50px" height="50px">
+                        <span class="footer-logo-text">PrescribeMate</span>
+                    </div>
+                    <p>PrescribeMate is a comprehensive digital healthcare platform connecting hospitals, doctors, patients, and pharmacies to create a seamless, paperless healthcare ecosystem.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#platform">Platform</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="{% host_url 'pricing' host 'www' %}">Pricing</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="{% host_url 'blogs' host 'www' %}">Blogs</a></li>
+                        <li><a href="{% host_url 'contact' host 'www' %}">Help Center</a></li>
+                        <li><a href="#">Tutorials</a></li>
+                        <li><a href="{% host_url 'api_docs' host 'www' %}">API Documentation</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="{% host_url 'about' host 'www' %}">About Us</a></li>
+                        <li><a href="{% host_url 'careers' host 'www' %}">Careers</a></li>
+                        <li><a href="{% host_url 'press' host 'www' %}">Press</a></li>
+                        <li><a href="{% host_url 'contact' host 'www' %}">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-newsletter">
+                    <h3>Subscribe to Newsletter</h3>
+                    <p>Get the latest updates, news and product offers delivered right to your inbox.</p>
+                    <form class="newsletter-form">
+                        {% csrf_token %}
+                        <input type="email" placeholder="Your email address">
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 PrescribeMate. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+        
+        // Tab Functionality
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons and contents
+                tabBtns.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+                
+                // Add active class to clicked button and corresponding content
+                btn.classList.add('active');
+                const tabId = btn.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+        
+        // Smooth Scrolling for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (window.innerWidth <= 768) {
+                        document.querySelector('.nav-links').style.display = 'none';
+                    }
+                }
+            });
+        });
+        
+        // Sticky Header on Scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+{% extends 'hospitals/hmsbase.html' %}
+
+{% load static %}
+
+{% load hosts %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block seo %}{% endblock %}
+
+{% block headscripts %}{% endblock %}
+
+{% block headlinks %}{% endblock %}
+
+{% block body %}
+    <div class="dashboard-container">
+        <div class="button-group">
+            <button class="section-button active" data-section="metrics-section">Metrics Data</button>
+            <button class="section-button" data-section="form-section">Form</button>
+            <!-- Additional buttons can be added dynamically -->
+            <!-- <button class="section-button" data-section="some-section">Some</button> -->
+        </div>
+        
+        <!-- Data Section -->
+        <div id="metrics-section" class="content-section active">
+            <div class="card-section">
+                <div class="card"></div>
+                <div class="card"></div>
+                <div class="card"></div>
+            </div>
+        </div>
+
+        <!-- Data Section -->
+        <div id="form-section" class="content-section">
+        </div>
+
+        <!-- Some Section -->
+        <!-- 
+
+        <div id="some-section" class="content-section">
+        </div>
+
+        -->
+
+    </div>
+{% endblock %}
+
+{% block bodyscripts %}{% endblock %}
